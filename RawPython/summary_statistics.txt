@@ -1,0 +1,13 @@
+Summary Statistics:
+        goodreads_book_id           title                       genres           authors average_rating
+count        1.000000e+04           10000                        10000             10000          10000
+unique                NaN            9964                         9467              4664            184
+top                   NaN  Selected Poems  ['cookbook', 'non-fiction']  ['Stephen King']         [3.94]
+freq                  NaN               4                           16                60            187
+mean         5.264697e+06             NaN                          NaN               NaN            NaN
+std          7.575462e+06             NaN                          NaN               NaN            NaN
+min          1.000000e+00             NaN                          NaN               NaN            NaN
+25%          4.627575e+04             NaN                          NaN               NaN            NaN
+50%          3.949655e+05             NaN                          NaN               NaN            NaN
+75%          9.382225e+06             NaN                          NaN               NaN            NaN
+max          3.328864e+07             NaN                          NaN               NaN            NaN

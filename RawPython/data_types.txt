@@ -1,0 +1,6 @@
+Column Names and Types:
+goodreads_book_id     int64
+title                object
+genres               object
+authors              object
+average_rating       object

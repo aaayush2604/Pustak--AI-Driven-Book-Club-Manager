@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .results li {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .error {
+            color: red;
+        }
+        .suggestions {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            background: white;
+            z-index: 1000;
+            display: none;
+        }
+        .suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestions div:hover {
+            background-color: #f0f0f0;
+        }
+        .selected-books {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .selected-books span {
+            display: inline-block;
+            background-color: #e7f0ff;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 3px;
+            position: relative;
+        }
+        .selected-books span button {
+            background: transparent;
+            border: none;
+            color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Recommendation System</h1>
+        <form id="recommendation-form">
+            <label for="favorite_book_ids">Search for Favorite Book:</label>
+            <input type="text" id="book_search" autocomplete="off">
+            <div id="suggestions" class="suggestions"></div>
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        <div class="selected-books" id="selected-books">
+            <h2>Selected Books:</h2>
+            <div id="selected-books-list"></div>
+        </div>
+
+        <div id="recommendation-results" class="results" style="display: none;">
+            <h2>Recommended Books:</h2>
+            <ul id="results-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        const selectedBooks = [];
+    const selectedBooksIds = [];
+    let dataset = [];  // This will hold the dataset from the server
+
+    document.getElementById('book_search').addEventListener('input', function() {
+        const query = this.value;
+
+        if (query.length < 2) {
+            document.getElementById('suggestions').style.display = 'none';
+            return;
+        }
+
+        fetch(`/search?query=${query}`)
+            .then(response => response.json())
+            .then(suggestions => {
+                const suggestionsDiv = document.getElementById('suggestions');
+                suggestionsDiv.innerHTML = '';
+
+                suggestions.forEach(suggestion => {
+                    const div = document.createElement('div');
+                    div.textContent = suggestion.title; // Display the book title
+                    div.dataset.id = suggestion.goodreads_book_id; // Store the ID
+                    div.onclick = function() {
+                        addBook(div.textContent, div.dataset.id); // Pass both title and ID
+                        suggestionsDiv.style.display = 'none'; // Hide suggestions after selection
+                        document.getElementById('book_search').value = ''; // Clear the search box
+                    };
+                    suggestionsDiv.appendChild(div);
+                });
+
+                suggestionsDiv.style.display = suggestions.length ? 'block' : 'none';
+            });
+    });
+
+    function addBook(title, bookId) {
+        if (selectedBooks.length < 5 && !selectedBooks.includes(title)) {
+            selectedBooks.push(title);
+            selectedBooksIds.push(bookId);
+            updateSelectedBooksDisplay();
+        }
+    }
+
+
+        function updateSelectedBooksDisplay() {
+            const selectedBooksList = document.getElementById('selected-books-list');
+            selectedBooksList.innerHTML = '';
+
+            selectedBooks.forEach((book, index) => {
+                const span = document.createElement('span');
+                span.textContent = book;
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = '×';
+                removeButton.onclick = function() {
+                    removeBook(index);
+                };
+
+                span.appendChild(removeButton);
+                selectedBooksList.appendChild(span);
+            });
+        }
+
+        function removeBook(index) {
+            selectedBooks.splice(index, 1);
+            selectedBooksIds.splice(index, 1);
+            updateSelectedBooksDisplay();
+        }
+
+        document.getElementById('recommendation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            console.log(selectedBooksIds)
+            if (selectedBooksIds.length === 0) {
+                alert('Please select at least one book.');
+                return;
+            }
+
+            fetch('/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ favorite_book_ids: selectedBooksIds })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsList = document.getElementById('results-list');
+                resultsList.innerHTML = '';
+
+                if (data.error) {
+                    resultsList.innerHTML = `<li class="error">${data.error}</li>`;
+                } else {
+                    data.forEach(book => {
+                        const listItem = document.createElement('li');
+                        listItem.innerText = `${book.title} by ${book.authors} (Rating: ${book.average_rating})`;
+                        resultsList.appendChild(listItem);
+                    });
+                }
+
+                document.getElementById('recommendation-results').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        function getBookIdByTitle(title) {
+            const book = dataset.find(b => b.title.toLowerCase() === title.toLowerCase());
+            return book ? book.goodreads_book_id : null; // Replace with actual implementation
+        }
+    </script>
+</body>
+</html>
