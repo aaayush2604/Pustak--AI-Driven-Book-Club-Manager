@@ -1,10 +1,15 @@
-import pandas as pd;
+import pandas as pd
+
 df1 = pd.read_csv('book_tags.csv')
 df2 = pd.read_csv('books.csv')
 df3 = pd.read_csv('tags.csv')
+
 merged_df = pd.merge(df1, df3, on='tag_id')
+
 final_merged_df = pd.merge(merged_df, df2, on='goodreads_book_id')
+
 dataset = final_merged_df.groupby(['goodreads_book_id','title'])[['tag_name','authors','average_rating']].agg(list).reset_index()
+
 def remove_duplicates(genre_list):
     if isinstance(genre_list, list):
         unique_genres = list(dict.fromkeys(genre_list))
@@ -15,6 +20,7 @@ def remove_duplicates(genre_list):
 dataset['authors']=dataset['authors'].apply(remove_duplicates)
 dataset['tag_name']=dataset['tag_name'].apply(remove_duplicates)
 dataset['average_rating']=dataset['average_rating'].apply(remove_duplicates)
+
 book_genres = [
     'action',
     'adventure',
@@ -121,6 +127,7 @@ book_genres = [
 ]
 def filter_genres(genre_list):
     return [genre for genre in genre_list if genre in book_genres]
+
 dataset['tag_name'] = dataset['tag_name'].apply(filter_genres)
 dataset = dataset.rename(columns={'tag_name': 'genres'})
 dataset.to_csv('dataset.csv',index=False)

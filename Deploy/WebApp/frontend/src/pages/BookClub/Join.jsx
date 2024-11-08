@@ -93,44 +93,53 @@ const JoinBookClub = () => {
   };
 
   return (
-    <div>
-      <h1>Join Book Club</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Book Club Name:</label>
-          <input
-            type="text"
-            value={bookClubName}
-            onChange={handleNameChange}  // Handle input change to filter suggestions
-            placeholder="Enter Book Club Name"
-            required
-          />
-          {/* Suggestions Dropdown */}
-          {filteredBookClubs.length > 0 && (
-            <ul>
-              {filteredBookClubs.map((club) => (
-                <li
-                  key={club._id}
-                  onClick={() => handleSelectClub(club)}  // On click, select the club
-                  style={{ cursor: "pointer", padding: "5px", borderBottom: "1px solid #ddd" }}
-                >
-                  {club.name}
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Join Book Club</h1>
+    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 w-96">
+        <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">Book Club Name:</label>
+            <input
+                type="text"
+                value={bookClubName}
+                onChange={handleNameChange}  // Handle input change to filter suggestions
+                placeholder="Enter Book Club Name"
+                required
+                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {/* Suggestions Dropdown */}
+            {filteredBookClubs.length > 0 && (
+                <ul className="mt-1 border border-gray-300 rounded-lg bg-white shadow-lg">
+                    {filteredBookClubs.map((club) => (
+                        <li
+                            key={club._id}
+                            onClick={() => handleSelectClub(club)}  // On click, select the club
+                            className="cursor-pointer p-2 hover:bg-blue-100"
+                        >
+                            {club.name}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
-        {loading ? <button type="submit" disabled={loading}>
-        Joining...
-        </button> : <button type="submit" disabled={loading}>
-        Join Book Club
-        </button>}
-        
-      </form>
-      <Link to='/register'>Create Your Own Book Club</Link>
-      <Link to='/selectTop5'>Add Top 5 Favorites</Link>
-      <BookClubsList trigger={trigger}/>
+        <button
+            type="submit"
+            disabled={loading}
+            className={`w-full p-2 text-white font-semibold rounded-lg ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'} focus:outline-none`}
+        >
+            {loading ? "Joining..." : "Join Book Club"}
+        </button>
+    </form>
+    <div className="mt-4">
+        <Link to='/register' className="text-sm text-blue-600 hover:underline mr-4">
+            Create Your Own Book Club
+        </Link>
+        <Link to='/selectTop5' className="text-sm text-blue-600 hover:underline">
+            Add Top 5 Favorites
+        </Link>
     </div>
+    <BookClubsList trigger={trigger} />
+</div>
+
   );
 };
 

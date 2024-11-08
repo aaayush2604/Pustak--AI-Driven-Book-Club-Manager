@@ -39,18 +39,27 @@ const BookClubDetail = () => {
   }
 
   return (
-    <div>
-      <h1>{bookClub.name}</h1>
-      <p>{bookClub.description}</p>
-      <p>Number of Members: {bookClub.numberOfMembers}</p>
-      <p>Created at: {new Date(bookClub.createdAt).toLocaleString()}</p>
+    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <h1 className="text-4xl font-bold mb-4 text-gray-800">{bookClub.name}</h1>
+    <p className="text-lg text-gray-700 mb-2">{bookClub.description}</p>
+    <p className="text-sm text-gray-600 mb-1">Number of Members: <span className="font-semibold">{bookClub.numberOfMembers}</span></p>
+    <p className="text-sm text-gray-600 mb-4">Created at: <span className="font-semibold">{new Date(bookClub.createdAt).toLocaleString()}</span></p>
 
-      {/* "Go Back to Home Page" Button */}
-      <button onClick={goToHomePage} style={{ marginTop: '20px', padding: '10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+    {/* "Go Back to Home Page" Button */}
+    <button
+        onClick={goToHomePage}
+        className="mt-6 w-full max-w-xs px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+    >
         Go Back to Home Page
-      </button>
-      <GetRecommendation bookClubId={bookClubId}/>
+    </button>
+
+    {/* Add spacing between buttons and the next component */}
+    <div className="mt-4">
+        <GetRecommendation bookClubId={bookClubId} />
     </div>
+</div>
+
+
   );
 };
 

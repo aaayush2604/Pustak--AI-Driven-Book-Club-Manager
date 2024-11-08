@@ -134,93 +134,118 @@ const RegisterBookClub = () => {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
-      <h1>Register Book Club</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Book Club Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            placeholder="Enter Book Club Name"
-          />
-        </div>
-        <div>
-          <label>Manager Name:</label>
-          <input
-            type="text"
-            value={managerName}
-            onChange={handleManagerInput}
-            required
-            placeholder="Enter Manager Name"
-          />
-          {filteredUsersforManager.length > 0 && (
-            <ul>
-              {filteredUsersforManager.map((user) => (
-                <li key={user._id} onClick={() =>selectManager(user)}>
-                  {user.username}
+    <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-lg">
+    <h1 className="text-2xl font-bold text-gray-800 mb-6">Register Book Club</h1>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">Book Club Name:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          placeholder="Enter Book Club Name"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">Manager Name:</label>
+        <input
+          type="text"
+          value={managerName}
+          onChange={handleManagerInput}
+          required
+          placeholder="Enter Manager Name"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+        />
+        {filteredUsersforManager.length > 0 && (
+          <ul className="mt-2 bg-white border border-gray-300 rounded-md max-h-40 overflow-y-auto">
+            {filteredUsersforManager.map((user) => (
+              <li
+                key={user._id}
+                onClick={() => selectManager(user)}
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+              >
+                {user.username}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">Current Book (optional):</label>
+        <input
+          type="text"
+          value={currentReadId}
+          onChange={handleBookInput}
+          placeholder="Enter Book Title"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+        />
+        {filteredBooks.length > 0 && (
+          <ul className="mt-2 bg-white border border-gray-300 rounded-md max-h-40 overflow-y-auto">
+            {filteredBooks.map((book) => (
+              <li
+                key={book._id}
+                onClick={() => selectBook(book)}
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+              >
+                {book.title}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">Members:</label>
+        <input
+          type="text"
+          value={memberIds}
+          onChange={handleMemberInput}
+          placeholder="Enter Member Name"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+        />
+        {filteredUsersforMember.length > 0 && (
+          <ul className="mt-2 bg-white border border-gray-300 rounded-md max-h-40 overflow-y-auto">
+            {filteredUsersforMember.map((user) => (
+              <li
+                key={user._id}
+                onClick={() => addMember(user)}
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+              >
+                {user.username}
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className="mt-2">
+          {selectedMembers.length > 0 && (
+            <ul className="bg-gray-100 border border-gray-300 rounded-md">
+              {selectedMembers.map((member) => (
+                <li key={member._id} className="px-4 py-2">
+                  {member.username}
                 </li>
               ))}
             </ul>
           )}
         </div>
-        <div>
-          <label>Current Book (optional):</label>
-          <input
-            type="text"
-            value={currentReadId}
-            onChange={handleBookInput}
-            placeholder="Enter Book Title"
-          />
-          {filteredBooks.length > 0 && (
-            <ul>
-              {filteredBooks.map((book) => (
-                <li key={book._id} onClick={() => selectBook(book)}>
-                  {book.title}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <div>
-          <label>Members:</label>
-          <input
-            type="text"
-            value={memberIds}
-            onChange={handleMemberInput}
-            placeholder="Enter Member Name"
-          />
-          {filteredUsersforMember.length > 0 && (
-            <ul>
-              {filteredUsersforMember.map((user) => (
-                <li key={user._id} onClick={() => addMember(user)}>
-                  {user.username}
-                </li>
-              ))}
-            </ul>
-          )}
-          <div>
-            {selectedMembers.length > 0 && (
-              <ul>
-                {selectedMembers.map((member) => (
-                  <li key={member._id}>{member.username}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
-        <div>
-          <button type="submit" disabled={loading}>
-            {loading ? 'Registering...' : 'Register Book Club'}
-          </button>
-        </div>
-      </form>
-      <Link to='/'>Join a BookClub</Link>
-      <Link to='/selectTop5'>Add Top 5 Books</Link>
-      {console.log(message)}
+      </div>
+      <div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-500 disabled:opacity-50"
+        >
+          {loading ? 'Registering...' : 'Register Book Club'}
+        </button>
+      </div>
+    </form>
+    <div className="mt-6 flex justify-between">
+      <Link to="/" className="text-blue-600 hover:underline">Join a BookClub</Link>
+      <Link to="/selectTop5" className="text-blue-600 hover:underline">Add Top 5 Books</Link>
     </div>
+    {console.log(message)}
+  </div>
+  
   );
 };
 

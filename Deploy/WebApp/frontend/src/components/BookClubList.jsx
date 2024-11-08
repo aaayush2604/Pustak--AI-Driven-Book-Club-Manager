@@ -40,22 +40,26 @@ const BookClubsList = ({trigger}) => {
   }
 
   return (
-    <div>
-      <h1>Your Book Clubs</h1>
-      {bookClubs.length === 0 ? (
-        <p>You are not part of any book clubs.</p>
-      ) : (
-        <ul>
-          {bookClubs.map((bookClub) => (
-            <li key={bookClub._id}>
-              <button onClick={() => handleBookClubClick(bookClub._id)}>
-                {bookClub.name}
-              </button>
-            </li>
-          ))}
+    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <h1 className="text-3xl font-bold mb-6 text-gray-800">Your Book Clubs</h1>
+    {bookClubs.length === 0 ? (
+        <p className="text-lg text-gray-600">You are not part of any book clubs.</p>
+    ) : (
+        <ul className="w-full max-w-md bg-white shadow-md rounded-lg">
+            {bookClubs.map((bookClub) => (
+                <li key={bookClub._id} className="border-b last:border-b-0">
+                    <button
+                        onClick={() => handleBookClubClick(bookClub._id)}
+                        className="w-full text-left px-4 py-2 text-lg text-blue-600 hover:bg-blue-100 focus:outline-none"
+                    >
+                        {bookClub.name}
+                    </button>
+                </li>
+            ))}
         </ul>
-      )}
-    </div>
+    )}
+</div>
+
   );
 };
 
