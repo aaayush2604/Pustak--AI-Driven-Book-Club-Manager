@@ -2,10 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-.login-background{
+:root{
+    --primary-color:#eee5da;
+    --secondary-color:#e2d7c8;
+    --button-color:#f18966;
+}
+
+.desktop-login-background{
+    display:flex;
     background-image: url('../public/Desktop_Wallpaper.jpeg');
     background-clip: border-box;
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
+}
+.mobile-login-background{
+    display:none;
+}
+
+@media(max-width:600px){
+    .mobile-login-background{
+        display:flex;
+        background-image: url('../public/Mobile_Wallpaper.jpeg');
+        background-clip: border-box;
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat;
+    }
+    .desktop-login-background{
+        display:none;
+    }
 }

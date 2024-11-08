@@ -19,7 +19,7 @@ function App() {
     <Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
   </Routes>
   
-  <div className=" mb-4">
+  <div>
     {authUser && <button
       onClick={logout}
       className="w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-500 transition duration-200"
