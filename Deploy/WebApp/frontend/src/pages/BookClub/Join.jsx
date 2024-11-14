@@ -93,7 +93,7 @@ const JoinBookClub = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen ">
+    <div className="flex flex-col items-center justify-center">
     <form onSubmit={handleSubmit} className="shadow-md rounded-lg p-6 w-96 mt-4 bg-[var(--primary-color)]">
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Join Book Club</h1>
         <div className="mb-4">

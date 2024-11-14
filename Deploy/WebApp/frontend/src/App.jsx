@@ -9,7 +9,6 @@ import { useLogOut } from './Hooks/useLogOut.jsx';
 function App() {
 
   const {authUser}=useAuthContext();
-  const {logout}=useLogOut();
 
   return (
     <div className="flex flex-col">
@@ -19,14 +18,6 @@ function App() {
     <Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
   </Routes>
   
-  <div>
-    {authUser && <button
-      onClick={logout}
-      className="w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-500 transition duration-200"
-    >
-      Log Out
-    </button>}
-  </div>
 </div>
   )
 }
