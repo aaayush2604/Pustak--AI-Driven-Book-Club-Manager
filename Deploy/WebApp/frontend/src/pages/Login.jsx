@@ -14,7 +14,7 @@ const Login = () => {
     }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-clip-border bg-[url(../public/Mobile_Wallpaper.jpeg)] sm:bg-[url(../public/Desktop_Wallpaper.jpeg)]">
+    <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-clip-border bg-[url(./Mobile_Wallpaper.jpeg)] sm:bg-[url(./Desktop_Wallpaper.jpeg)]">
     <div className="bg-[var(--primary-color)] shadow-md rounded-lg p-4 sm:p-8 sm:w-96 w-[90%]">
         <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">Login</h1>
 

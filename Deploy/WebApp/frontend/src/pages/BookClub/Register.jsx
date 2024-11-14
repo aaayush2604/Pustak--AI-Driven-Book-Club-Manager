@@ -134,7 +134,7 @@ const RegisterBookClub = () => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-lg">
+    <div className="p-6 max-w-md mx-auto shadow-lg rounded-lg w-96 bg-[var(--primary-color)]">
     <h1 className="text-2xl font-bold text-gray-800 mb-6">Register Book Club</h1>
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
@@ -233,15 +233,15 @@ const RegisterBookClub = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-500 disabled:opacity-50"
+          className="w-full py-2 px-4 bg-[var(--button-color)] hover:bg-[#ef7349] text-white font-bold rounded-md disabled:opacity-50"
         >
           {loading ? 'Registering...' : 'Register Book Club'}
         </button>
       </div>
     </form>
     <div className="mt-6 flex justify-between">
-      <Link to="/" className="text-blue-600 hover:underline">Join a BookClub</Link>
-      <Link to="/selectTop5" className="text-blue-600 hover:underline">Add Top 5 Books</Link>
+      <Link to="/" className="text-[var(--button-color)] hover:underline">Join a BookClub</Link>
+      <Link to="/selectTop5" className="text-[var(--button-color)] hover:underline">Add Top 5 Books</Link>
     </div>
     {console.log(message)}
   </div>

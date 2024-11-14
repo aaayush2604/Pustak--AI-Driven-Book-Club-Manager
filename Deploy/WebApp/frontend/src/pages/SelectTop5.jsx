@@ -125,7 +125,7 @@ const FavoriteBooks = () => {
             <span className="text-gray-800">{book.title}</span>
             <button
               onClick={() => toggleFavorite(book)}
-              className="ml-2 py-1 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
+              className="ml-2 py-1 px-2 bg-[var(--button-color)] hover:bg-[#ef7349] text-white rounded-md hover:"
             >
               {favoriteBooks.find((favBook) => favBook.goodreads_book_id === book.goodreads_book_id)
                 ? 'Remove from Favorites'
@@ -151,16 +151,16 @@ const FavoriteBooks = () => {
     )}
   </div>
 
-  <div>
+  <div className='flex justify-center items-center flex-col'>
     <button
       onClick={submitPreference}
-      className="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md hover:bg-green-500"
+      className="w-full py-2 px-4 font-bold rounded-md bg-[var(--button-color)] hover:bg-[#ef7349] text-white"
     >
       Add Favorites
     </button>
     <button
         onClick={goToHomePage}
-        className="mt-6 w-full max-w-xs px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+        className="mt-6 w-full max-w-xs px-6 py-3 font-semibold rounded-lg bg-[var(--button-color)] hover:bg-[#ef7349] focus:outline-none focus:ring-2 focus:ring-[var(--button-color)] focus:ring-opacity-50 transition duration-300 text-white"
     >Go Back to Home Page</button>
   </div>
 </div>

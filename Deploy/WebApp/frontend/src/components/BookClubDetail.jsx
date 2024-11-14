@@ -39,7 +39,7 @@ const BookClubDetail = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <div className="flex flex-col justify-center items-center p-6 w-96 rounded-lg bg-[var(--primary-color)]">
     <h1 className="text-4xl font-bold mb-4 text-gray-800">{bookClub.name}</h1>
     <p className="text-lg text-gray-700 mb-2">{bookClub.description}</p>
     <p className="text-sm text-gray-600 mb-1">Number of Members: <span className="font-semibold">{bookClub.numberOfMembers}</span></p>
@@ -48,7 +48,7 @@ const BookClubDetail = () => {
     {/* "Go Back to Home Page" Button */}
     <button
         onClick={goToHomePage}
-        className="mt-6 w-full max-w-xs px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+        className="mt-6 w-full max-w-xs px-6 py-3  font-semibold rounded-lg bg-[var(--button-color)] hover:bg-[#ef7349] text-white focus:outline-none focus:ring-2 focus:ring-[var(--button-color)] focus:ring-opacity-50 transition duration-300"
     >
         Go Back to Home Page
     </button>

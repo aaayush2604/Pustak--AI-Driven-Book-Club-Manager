@@ -93,9 +93,9 @@ const JoinBookClub = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Join Book Club</h1>
-    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 w-96">
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+    <form onSubmit={handleSubmit} className="shadow-md rounded-lg p-6 w-96 mt-4 bg-[var(--primary-color)]">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Join Book Club</h1>
         <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">Book Club Name:</label>
             <input
@@ -124,19 +124,19 @@ const JoinBookClub = () => {
         <button
             type="submit"
             disabled={loading}
-            className={`w-full p-2 text-white font-semibold rounded-lg ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'} focus:outline-none`}
+            className={`w-full p-2 text-white font-semibold rounded-lg ${loading ? 'bg-gray-400' : 'bg-[var(--button-color)] hover:bg-[#ef7349]'} focus:outline-none`}
         >
             {loading ? "Joining..." : "Join Book Club"}
         </button>
-    </form>
-    <div className="mt-4">
-        <Link to='/register' className="text-sm text-blue-600 hover:underline mr-4">
+        <div className="mt-4">
+        <Link to='/register' className="text-sm  hover:underline mr-4 text-[var(--button-color)]">
             Create Your Own Book Club
         </Link>
-        <Link to='/selectTop5' className="text-sm text-blue-600 hover:underline">
+        <Link to='/selectTop5' className="text-sm  hover:underline text-[var(--button-color)]">
             Add Top 5 Favorites
         </Link>
     </div>
+    </form>
     <BookClubsList trigger={trigger} />
 </div>
 

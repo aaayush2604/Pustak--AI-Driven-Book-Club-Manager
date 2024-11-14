@@ -198,19 +198,17 @@ const GetRecommendation = ({ bookClubId }) => {
 
   return (
     <div>
-      <h2>Get Book Recommendations</h2>
 
       {/* Button to fetch top 5 lists and recommendations */}
       <button
         onClick={fetchTop5AndRecommendations}  // Trigger the combined fetch function
         style={{
           padding: '10px',
-          backgroundColor: '#28a745',
-          color: '#fff',
           border: 'none',
           borderRadius: '5px',
           cursor: 'pointer',
         }}
+        className='bg-[var(--button-color)] hover:bg-[#ef7349] text-white focus:outline-none focus:ring-2 focus:ring-[var(--button-color)]'
       >
         Get Your Next Recommendation
       </button>

@@ -40,7 +40,7 @@ const BookClubsList = ({trigger}) => {
   }
 
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center p-6  w-96 rounded-lg mt-4 bg-[var(--primary-color)]">
     <h1 className="text-3xl font-bold mb-6 text-gray-800">Your Book Clubs</h1>
     {bookClubs.length === 0 ? (
         <p className="text-lg text-gray-600">You are not part of any book clubs.</p>
@@ -50,7 +50,7 @@ const BookClubsList = ({trigger}) => {
                 <li key={bookClub._id} className="border-b last:border-b-0">
                     <button
                         onClick={() => handleBookClubClick(bookClub._id)}
-                        className="w-full text-left px-4 py-2 text-lg text-blue-600 hover:bg-blue-100 focus:outline-none"
+                        className="w-full text-left px-4 py-2 text-lg text-[var(--button-color)] hover:bg-[#f3d1c6] focus:outline-none"
                     >
                         {bookClub.name}
                     </button>
